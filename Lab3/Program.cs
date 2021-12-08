@@ -1,4 +1,6 @@
-﻿using System;
+﻿//10.Даний масив розміру N і число k до (0 < k < N). Здійснити циклічне зсув елементів масиву ліворуч (праворуч) на k позицій. 
+
+using System;
 
 namespace Lab3
 {
@@ -8,47 +10,60 @@ namespace Lab3
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            int value = 0,
-                number = 0,
-                sum1 = 0,
-                sum2 = 0;
+            int[] array;
+            int[] array_2;
+            int N = 0,
+                k = 0;
             string answer;
-
-            Console.WriteLine("Перевірка чи сума двох перших цифр чотиризначного числа рівна сумі двох його останніх цифр.");
 
             do
             {
-                Console.WriteLine("Введіть 4-x значне число:");
+                Console.WriteLine("Введіть к-ть елементів масива:");
                 answer = Console.ReadLine();
-                value = Convert.ToInt32(answer);
-            } while (value <= 1000 || value >= 9999);
+                N = Convert.ToInt32(answer);
+            } while (N <= 0);
 
-            for (int i = 0; i < 4; i++)
+            array = new int[N];
+            array_2 = new int[N];
+
+            for (int i = 0; i < N; i++)
             {
-                if (i < 2)
-                {
-                    number = value % 10;
-                    value /= 10;
-                    sum1 += number;
-                }
-                else
-                {
-                    number = value % 10;
-                    value /= 10;
-                    sum2 += number;
-                }
+                array[i] = i + 1;
             }
 
-            Console.WriteLine("Результат:");
+            Console.WriteLine("Початковий масив: ");
 
-            if (sum1 == sum2)
+            for (int i = 0; i < N; i++)
             {
-                Console.WriteLine("True");
+                Console.Write(array[i] + " ");
             }
-            else
+
+            Console.WriteLine();
+
+            do
             {
-                Console.WriteLine("False");
+                Console.WriteLine("Введіть на яку к-ть елементів зсунути масив:");
+                k = int.Parse(Console.ReadLine());
+            } while (k <= 0 || k >= N);
+
+            for (int i = 0, j = k; i < N - k; i++, j++)
+            {
+                array_2[i] = array[j];
             }
+
+            for (int i = N - k, j = 0; i < N; i++, j++)
+            {
+                array_2[i] = array[j];
+            }
+
+            Console.WriteLine("Масив після зсуву: ");
+
+            for (int i = 0; i < N; i++)
+            {
+                Console.Write(array_2[i] + " ");
+            }
+
+            Console.WriteLine();
         }
     }
 }

@@ -1,6 +1,17 @@
-﻿using System;
+﻿/*У всіх завданнях даного пункту потрібно вивести логічне значення True, якщо приведений вислів для 
+ * запропонованих початкових даних є істинним, і значення False у супротивному випадку. Всі числа, 
+ * для яких вказано кількість цифр (двозначне число, тризначне число і т.д.), вважаються цілими. 
+ * 
+ * Перевірити істинність вислову: "Сума двох перших цифр даного чотиризначного числа рівна сумі двох його останніх цифр". 
+*/
 
-namespace Lab2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab_2
 {
     class Program
     {
@@ -8,34 +19,48 @@ namespace Lab2
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            int nn = -1,
-                nk = 0;
-            double result = 1;
+            int value = 0,
+                number = 0,
+                sum1 = 0,
+                sum2 = 0;
             string answer;
 
-            do
-            {
-                Console.WriteLine("Введіть перше число (воно має бути невід'ємне і менше або рівне другого числа):");
-                answer = Console.ReadLine();
-                nn = Convert.ToInt32(answer);
-            } while (nn < 0);
+            Console.WriteLine("Перевірка чи сума двох перших цифр чотиризначного числа рівна сумі двох його останніх цифр.");
 
             do
             {
-                Console.WriteLine("Введіть друге число:");
+                Console.WriteLine("Введіть 4-x значне число:");
                 answer = Console.ReadLine();
-                nk = Convert.ToInt32(answer);
-            } while (nk < nn);
+                value = Convert.ToInt32(answer);
+            } while (value <= 1000 || value >= 9999);
 
-            for (int k = nn; k <= nk; k++)
+            for (int i = 0; i < 4; i++)
             {
-                result *= Math.Pow(-1, Math.Pow(k, 2.0) + k + 1) * Math.Pow(k, 2.0) / (2 * Math.Pow(k, 2.0) + 5);
+                if (i < 2)
+                {
+                    number = value % 10;
+                    value /= 10;
+                    sum1 += number;
+                }
+                else
+                {
+                    number = value % 10;
+                    value /= 10;
+                    sum2 += number;
+                }
             }
 
-            Console.WriteLine($"Відповідь: {result}");
+            Console.WriteLine("Результат:");
 
-            Console.ReadLine();
+            if (sum1 == sum2)
+            {
+                Console.WriteLine("True");
+            }
+            else
+            {
+                Console.WriteLine("False");
+            }
         }
+
     }
 }
-
